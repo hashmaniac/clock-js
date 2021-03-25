@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Js Clock</title>
+        
+        <style>
+            body {
+                background: black;
+            }
+            
+            .clock {
+                position: absolute;
+                top: 50%;
+                left: 34%;
+                color: red;
+                font-size: 70px;
+                font-family: Orbitron;
+                transform: translateX(-50%), translateY(-50%);
+                letter-spacing: 7px;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <div id="clockDisplay" class="clock" onload="showTime()"></div>
+        
+        
+        <script>
+            function showTime() {
+                //declare date hours minutes seconds and session variables
+                var date = new Date();
+                var h = date.getHours();
+                var m = date.getMinutes();
+                var s = date.getSeconds();
+                var session = "AM";
+                
+                //convert 0hrs to 12hrs
+                if(h == 0) {
+                    h = 12;
+                }
+                //change from 24h system to 12h system
+                if(h > 12) {
+                    h = h - 12;
+                    session = "PM";
+                }
+                
+                //add a zero to variables less than ten for uniformity and standard
+                h = (h < 10) ? "0" + h : h;
+                m = (m < 10) ? "0" + m : m;
+                s = (s < 10) ? "0" + s : s;
+                
+                //the time to be displayed
+                var time = h + ":" + m + ":" + s + " " + session;
+                
+                //return text content to the div
+                document.getElementById("clockDisplay").innerText = time;
+                document.getElementById("clockDisplay").textContent = time;
+                
+                setTimeout(showTime, 1000);
+            }
+            
+            //call the function
+            showTime();
+        </script>
+    </body>
+</html>
